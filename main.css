@@ -43,3 +43,9 @@ ul {
 .selected {
     background-color: #eee;
 }
+
+.form-main {
+    max-width: 450px;
+    margin: 0 auto;
+    margin-top: 70px;
+}
