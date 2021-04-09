@@ -49,3 +49,8 @@ ul {
     margin: 0 auto;
     margin-top: 70px;
 }
+
+.login-form p {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
