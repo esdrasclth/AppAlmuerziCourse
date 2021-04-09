@@ -90,28 +90,39 @@ const inicializaDatos = () => {
 
 const renderApp = () => {
     const token = localStorage.getItem('token')
+    if (token) {
+        const ordersView = document.getElementById('orders-view')
+        document.getElementsByTagName('body')[0].innerHTML = ordersView.innerHTML
+    }
     console.log('token', token);
 }
 
-renderApp()
-const loginForm = document.getElementById('login-form')
-loginForm.onsubmit = (e) => {
-    e.preventDefault()
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
+const renderLogin = () => {
+    const loginTemplate = document.getElementById('login-template')
+    document.getElementsByTagName('body')[0].innerHTML = loginTemplate.innerHTML
 
-    fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password})
-    }).then(x => x.json())
-      .then(respuesta => {
-          localStorage.setItem('token', respuesta.token)
-          ruta = 'orders'
-      })
+    const loginForm = document.getElementById('login-form')
+    loginForm.onsubmit = (e) => {
+        e.preventDefault()
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+
+        fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        }).then(x => x.json())
+            .then(respuesta => {
+                localStorage.setItem('token', respuesta.token)
+                ruta = 'orders'
+            })
+    }
 }
+
+renderApp()
+
 
 //inicializaFormulario()
 //inicializaDatos()

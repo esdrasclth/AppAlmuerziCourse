@@ -8,23 +8,25 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-
-    <div class="form-main">
-        <p class="form-title">Inicia Sesión</p>
-        <form id="login-form" class="login-form">
-        <div>
-            <p>Email</p>
-            <input id="email" placeholder="Correo Electronico">
+    
+    <template id="login-template">
+        <div class="form-main">
+            <p class="form-title">Inicia Sesión</p>
+            <form id="login-form" class="login-form">
+            <div>
+                <p>Email</p>
+                <input id="email" placeholder="Correo Electronico">
+            </div>
+            <div>
+                <p>Contraseña</p>
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <div>
+                <button class="btn">Enviar</button>
+            </div>
+            </form>
         </div>
-        <div>
-            <p>Contraseña</p>
-            <input type="password" id="password" placeholder="Contraseña">
-        </div>
-        <div>
-            <button class="btn">Enviar</button>
-        </div>
-        </form>
-    </div>
+    </template>
 
     <template id="orders-view">
         <div id="meals">
