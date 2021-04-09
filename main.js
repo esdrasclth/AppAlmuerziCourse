@@ -91,10 +91,16 @@ const inicializaDatos = () => {
 const renderApp = () => {
     const token = localStorage.getItem('token')
     if (token) {
-        const ordersView = document.getElementById('orders-view')
-        document.getElementsByTagName('body')[0].innerHTML = ordersView.innerHTML
+        return renderOrders();
     }
-    console.log('token', token);
+    renderLogin()
+}
+
+const renderOrders = () => {
+    const ordersView = document.getElementById('orders-view')
+    document.getElementsByTagName('body')[0].innerHTML = ordersView.innerHTML
+    inicializaFormulario()
+    inicializaDatos()
 }
 
 const renderLogin = () => {
@@ -117,12 +123,9 @@ const renderLogin = () => {
             .then(respuesta => {
                 localStorage.setItem('token', respuesta.token)
                 ruta = 'orders'
+                renderOrders()
             })
     }
 }
 
 renderApp()
-
-
-//inicializaFormulario()
-//inicializaDatos()
