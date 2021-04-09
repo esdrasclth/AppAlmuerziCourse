@@ -37,7 +37,7 @@ const inicializaFormulario = () => {
         submit.setAttribute('disabled', true)
         const mealId = document.getElementById('meals-id')
         const mealIdValue = mealId.value
-        if(!mealIdValue) {
+        if (!mealIdValue) {
             alert('Debe seleccionar un plato')
             return
         }
@@ -55,47 +55,53 @@ const inicializaFormulario = () => {
             },
             body: JSON.stringify(order)
         }).then(x => x.json())
-        .then(respuesta => {
-            const renderedOrder = renderOrder(respuesta, mealsState)
-            const ordersList = document.getElementById('orders-list')
-            ordersList.appendChild(renderedOrder)
-            submit.removeAttribute('disabled')
-        })
+            .then(respuesta => {
+                const renderedOrder = renderOrder(respuesta, mealsState)
+                const ordersList = document.getElementById('orders-list')
+                ordersList.appendChild(renderedOrder)
+                submit.removeAttribute('disabled')
+            })
     }
 }
 
 
 const inicializaDatos = () => {
     fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/meals')
-    .then(response => response.json())
-    .then(data => {
-        mealsState = data
-        const mealsList = document.getElementById('meals-list')
-        const submit = document.getElementById('submit')
-        const listItems = data.map(renderItem)
-        mealsList.removeChild(mealsList.firstElementChild)
-        listItems.forEach(element => mealsList.appendChild(element))
-        submit.removeAttribute('disabled')
-    fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/orders')
         .then(response => response.json())
-        .then(ordersData => {
-            const ordersList = document.getElementById('orders-list')
-            const listOrders = ordersData.map(orderData => renderOrder(orderData, data))
+        .then(data => {
+            mealsState = data
+            const mealsList = document.getElementById('meals-list')
+            const submit = document.getElementById('submit')
+            const listItems = data.map(renderItem)
+            mealsList.removeChild(mealsList.firstElementChild)
+            listItems.forEach(element => mealsList.appendChild(element))
+            submit.removeAttribute('disabled')
+            fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/orders')
+                .then(response => response.json())
+                .then(ordersData => {
+                    const ordersList = document.getElementById('orders-list')
+                    const listOrders = ordersData.map(orderData => renderOrder(orderData, data))
 
-            ordersList.removeChild(ordersList.firstElementChild)
-            listOrders.forEach(element => ordersList.appendChild(element))
+                    ordersList.removeChild(ordersList.firstElementChild)
+                    listOrders.forEach(element => ordersList.appendChild(element))
+                })
         })
-    })
 }
 
+const loginForm = document.getElementById('login-form')
+loginForm.onsubmit = (e) => {
+    e.preventDefault()
+    const email = document.getElementById('email').value
+    const password = document.getElementById('password').value
 
-fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/auth/register', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({email: 'esdrasclth@gmail.com', password: '123456'})
-})
+    fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password})
+    })
+}
 
 //inicializaFormulario()
 //inicializaDatos()
