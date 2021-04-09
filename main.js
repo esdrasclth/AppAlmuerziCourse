@@ -88,5 +88,14 @@ const inicializaDatos = () => {
     })
 }
 
+
+fetch('https://almuerzi-serverless-esdrasclth.vercel.app/api/auth/register', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({email: 'esdrasclth@gmail.com', password: '123456'})
+})
+
 //inicializaFormulario()
 //inicializaDatos()
